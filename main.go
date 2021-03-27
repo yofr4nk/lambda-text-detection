@@ -12,15 +12,13 @@ import (
 func HandleRequest(ctx context.Context, event events.S3Event) (string, error) {
 
 	fmt.Printf("This is your event: " + event.Records[0].EventName + "\n")
-	fmt.Printf("This is your file: " + event.Records[0].S3.Object.Key + "\n")
-	fmt.Printf("This is the bucket: " + event.Records[0].S3.Bucket.Name + "\n")
 
 	file := event.Records[0].S3.Object.Key
 	bucket := event.Records[0].S3.Bucket.Name
 
 	awsSession := sessions.CreateAwsSession()
 
-	// Create a Rekognition client with additional configuration
+	// Create a Rekognition client
 	svc := rekognition.New(awsSession)
 
 	output, err := svc.DetectText(&rekognition.DetectTextInput{
@@ -35,6 +33,8 @@ func HandleRequest(ctx context.Context, event events.S3Event) (string, error) {
 
 	if err != nil {
 		fmt.Print(err)
+
+		return "", err
 	}
 
 	for _, text := range output.TextDetections {
