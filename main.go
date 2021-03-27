@@ -6,7 +6,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/service/rekognition"
-	"github.com/yofr4nk/s3-event-process/sessions"
+	"github.com/yofr4nk/lambda-text-detection/sessions"
 )
 
 func HandleRequest(ctx context.Context, event events.S3Event) (string, error) {

@@ -1,4 +1,4 @@
-module github.com/yofr4nk/s3-event-process
+module github.com/yofr4nk/lambda-text-detection
 
 go 1.14
 
